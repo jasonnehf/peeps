@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Peeps! -- Contact List for Dummies</title>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://bootswatch.com/yeti/bootstrap.min.css">
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body ng-app='peeps' ng-controller='peepsCtrl'>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Peeps!</h1>
+			<div>a contact list <span class='fordummies'>of|by|for dummies</span></div>
+		</div>
+	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newContactModal" tabindex="-1" role="dialog" aria-labelledby="newContactModalLabel" ng-focus="clearNewContactForm">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content ">
+      <form name="modalForm">
+      <div class="modal-header">
+        <button type="button" ng-click='clearNewContactForm' class="close btn btn-lg" data-dismiss="modal" aria-label="Close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h1 class="" id="newContactModalLabel">Add New Contact</h1>
+      </div>
+      <div class="modal-body">
+
+        <div id='fg-fname' class="form-group form-group-lg">
+        	<label class='col-xs-6 control-label' for="input-fname">First Name</label>
+					<input ng-class="!newContact.fname.length>0 && 'required-input'" class='form-control' id='input-fname' placeholder="John" ng-model='newContact.fname' />
+				</div>
+
+				<div id='fg-lname' class="form-group form-group-lg">
+				<label class='col-xs-6 control-label' for="input-lname">Last Name</label>
+				<input ng-class="!newContact.lname.length>0 && 'required-input'" class='form-control' id='input-lname' placeholder="Doe" ng-model='newContact.lname' />
+				</div>
+
+				<div class="form-group form-group-lg">
+				<label class='col-xs-6 control-label' for="input-phone">Phone #</label>
+				<phonenumber-directive class='' id="input-phone" type="text" placeholder="'(555) 555-1234'" model="newContact.phone"></phonenumber-directive>
+				</div>
+
+				<div class="form-group form-group-lg">
+				<label class='col-xs-6 control-label' for="input-email">Email</label>
+				<input class='form-control' id='input-email' type='email' placeholder="johndoe@example.com" ng-model='newContact.email' />
+				</div>
+
+      </div>
+      <div class="modal-footer ">
+        <div class="col-xs-3 text-left">
+        	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click='clearNewContactForm()'>Cancel</button>
+        </div>
+
+        <div class="col-xs-9 text-right">
+        	<span class='required-input' ng-show="!newContact.fname.length || !newContact.lname.length" id='form-names-required'>First Name &amp; Last Name are required.</span>
+        	<button type="button" class="btn btn-primary" ng-click="checkRequiredFields() && addContact()">Add Contact</button>
+        </div>
+
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- END Modal -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+				<button ng-click='clearNewContactForm()' type="button" class="btn btn-primary" data-toggle="modal" data-target="#newContactModal"><span class="glyphicon glyphicon-xs glyphicon-plus" aria-hidden="true"></span></button>
+				<label class='label label-default'>Add Contact</label>
+			</div>
+		</div>
+		<table class="table table-hover table-striped">
+			<thead>
+					<th class="col-xs-5">Contact Name</th>
+					<th class="col-xs-3">Phone Number</th>
+					<th class="col-xs-3">Email Address</th>
+					<th class="col-xs-3">Remove?</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat='contact in contacts track by $index'>
+					<td>{{contact.fname + " " + contact.lname}}</td>
+					<td>{{contact.phone | phonenumber}}</td>
+					<td>{{contact.email}}</td>
+					<td class='col-xs-1'><button ng-click='removeContact(contact)' class='btn btn-xs btn-danger'><span aria-hidden='true' class='glyphicon glyphicon-xs glyphicon-remove'></span></button></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+
+
+	</div>
+
+<!--         -->
+<!-- SCRIPPS -->
+<!--         -->
+
+
+
+	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="./phonenumberModule.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>

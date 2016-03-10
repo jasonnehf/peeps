@@ -1,0 +1,19 @@
+Make a fully featured contact list, with complete CRUD functionality, using Angular, with an Express backend.
+
+MVP:
+	*	Your app should retrieve all existing contacts from your server when it is loaded.
+
+	*	Be able to create and delete contacts, as well as update any field.
+
+	*	Data should be persisted in a JSON database in Node.
+
+	*	Your contacts should take the form of objects, but the fields that they have are up to you.  Start with name, phone number and email address, but you can put as much information as you want.
+
+	*	All of these actions should be carried out in logically defined routes on your backend.  These interactions with server should be reasonable and RESTful.  POST to create a new contact, PUT to update a contact, etc.
+
+Extra Features:
+	*	Add a search filter.  Users can type in a search bar, and the contacts should be filtered as they type.  Check out filter.
+
+	*	Add sorting.  Be able to click on table headers, and sort the contacts by that field.  A second click should reverse the order.  Check out orderBy.
+
+	*	Be able to edit the contacts in the table.  This can be done with just Angular, but you may like to check out a third-party module.
